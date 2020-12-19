@@ -5,7 +5,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.stream.IntStream;
 
 public class Consumer implements Runnable {
-    private Queue queue;
+    private final Queue<Integer> queue;
 
     public Consumer(Queue<Integer> queue) {
         this.queue = queue;
@@ -16,15 +16,15 @@ public class Consumer implements Runnable {
 
         IntStream.range(1, 5)
                 .forEach(i -> {
-                    int consumedItem = 0;
+                    Integer consumedItem = 0;
                     if (queue instanceof BlockingQueue) {
                         try {
-                            consumedItem = (Integer) ((BlockingQueue<?>) queue).take();
+                            consumedItem = ((BlockingQueue<Integer>) queue).take();
                         } catch (InterruptedException e) {
                             System.err.println(e.getMessage());
                         }
                     } else {
-                        consumedItem = (Integer) queue.poll();
+                        consumedItem = queue.poll();
                     }
                     System.out.println("Consumer Thread :" + Thread.currentThread().getName()
                             + ", Consumed : " + consumedItem);

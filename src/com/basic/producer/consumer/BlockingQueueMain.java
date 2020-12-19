@@ -6,8 +6,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class BlockingQueueMain {
+
     public static void main(String[] args) {
         BlockingQueue<Integer> queue = new LinkedBlockingDeque<>();
+
         // producer adding numbers to queue.
         ExecutorService executorService = Executors.newFixedThreadPool(4);
         executorService.execute(new Producer(queue));
@@ -18,6 +20,7 @@ public class BlockingQueueMain {
         executorService.execute(new Consumer(queue));
 
         System.out.println("Thread :" + Thread.currentThread().getName() + " is done");
+        
         executorService.shutdown();
     }
 }
