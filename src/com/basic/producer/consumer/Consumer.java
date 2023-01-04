@@ -4,9 +4,6 @@ import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.stream.IntStream;
 
-/**
-This is a consumer
- */
 public class Consumer implements Runnable {
     private final Queue<Integer> queue;
 
